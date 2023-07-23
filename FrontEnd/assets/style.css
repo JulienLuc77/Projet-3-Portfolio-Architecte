@@ -109,6 +109,15 @@ header {
 #portfolio {
 	margin-top: 25vh;
 }
+.btn{
+	position: absolute;
+	left: 71.3%;
+}
+.forgot{
+	position: absolute;
+	left: 32.5%;
+	color: black;
+}
 button[type="submit"]{
 	padding: 8px;
 	font-family: 'Syne';
@@ -147,7 +156,12 @@ button[type="submit"]{
 	display: block;
 	outline: none;
 }
-
+#loginForm label[for="email"] {
+  font-size: 1em; 
+}
+#loginForm label[for="password"] {
+  font-size: 1em; 
+}
 #loginForm label {
   margin: 2em 0 1em 0;
   font-size: 1.2em;
