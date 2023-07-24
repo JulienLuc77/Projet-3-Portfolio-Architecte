@@ -13,18 +13,18 @@
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<a class="logo" href="./index.html"><h1>Sophie Bluel <span class="architect">ARCHITECTE D'INTÉRIEUR</span></h1></a>
 	<nav>
 		<ul class="btn">
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><a class="button-login" href="./index.html#section1">projets</a></li>
+			<li><a class="button-login" href="./index.html#section2">contact</a></li>
+			<li class="button-login bold">login</li>
+			<li><a href="https://www.instagram.com/"><img src="./assets/icons/instagram.png" class="logo-insta" alt="Instagram"></a></li>
 		</ul>
 	</nav>
 	<div>
 		<h2 class="connexion">Log in</h2>
-		<form id="loginForm" action="traitement_connexion.php" method="post">
+		<form id="loginForm" action="../Backend/traitement_connexion.php" method="post">
 			<label for="email">E-mail</label>
 			<input type="email" id="email" name="email">
 			<label for="password">Mot de passe</label>
@@ -34,3 +34,12 @@
 		</form>
 	</div>
 </header>
+<footer>
+	<nav>
+		<ul>
+			<li class="foot">Mentions Légales</li>
+		</ul>
+	</nav>
+</footer>
+</body>
+</html>

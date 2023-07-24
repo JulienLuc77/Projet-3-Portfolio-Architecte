@@ -31,6 +31,47 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+.bold{
+	font-weight: 900;
+}
+.logo-insta{
+	width: 20px;
+}
+.foot{
+	position: absolute;
+	top: 130%;
+	left: 85%;
+	font-size: 14px;
+}
+.foot2{
+	position: absolute;
+	font-size: 14px;
+	left: 85%;
+}
+.architect{
+	font-weight: normal;
+	margin-top: 6px;
+	font-size: 10px;
+	letter-spacing: 0.5px;
+}
+.big-text{
+	max-width: 410px;
+	line-height: 1.1;
+}
+.normal{
+	font-weight: normal;
+	color: rgb(48, 48, 48);
+}
+.picture{
+	transform: scale(1);
+}
+.container{
+	max-width: 600px;
+	margin-left: 40px;
+}
+#introduction{
+	margin-top: 100px;
+}
 ol, ul {
 	list-style: none;
 }
@@ -59,6 +100,12 @@ header {
 	margin: 50px 0
 }
 .button-login{
+	color: inherit;
+	text-decoration: none;
+	margin-right: 25px;
+	cursor: pointer;
+}
+.logo{
 	color: inherit;
 	text-decoration: none;
 }
@@ -111,7 +158,7 @@ header {
 }
 .btn{
 	position: absolute;
-	left: 71.3%;
+	left: 65.5%;
 }
 .forgot{
 	position: absolute;
