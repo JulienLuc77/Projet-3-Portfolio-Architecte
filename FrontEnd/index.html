@@ -18,7 +18,8 @@
 		<ul>
 			<li><a class="button-login" href="#section1">projets</a></li>
 			<li><a class="button-login" href="#section2">contact</a></li>
-			<li><a class="button-login" href="./index2.html">login</a></li>
+			<li id="loginListItem"><a class="button-login" href="./index2.html">login</a></li>
+			<li id="logoutListItem"><a id="logoutButton" href="#">logout</a></li>
 			<li><a href="https://www.instagram.com/"><img src="./assets/icons/instagram.png" class="logo-insta" alt="Instagram"></a></li>
 		</ul>
 	</nav>
@@ -27,6 +28,7 @@
 	<section id="introduction">
 		<figure class="container">
 			<img src="./assets/images/sophie-bluel.png" class="picture" alt="">
+			<button id="modifyImageBtn" class="hide-btn">Modifier</button>
 		</figure>
 		<article class="big-text">
 			<h2>Designer d'espace</h2>
@@ -37,16 +39,24 @@
 	</section>
 	<div id="section1">
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<h2>Mes projets</h2>
+		<button id="modifyProjectsBtn" class="right hide-btn">Modifier</button>
 		<ul id="menu-categories"></ul>
 		<div id="gallery" class="gallery"></div>
+		<div id="modal" class="modal">
+			<div class="modal-content">
+					<span class="close-btn">&times;</span>
+					<h3>Galerie photo</h3>
+					
+			</div>
+	</div>
 	</section>
 	</div>
 	<div id="section2">
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
+		<form id="send" action="#" method="post">
 			<label for="name">Nom</label>
 			<input type="text" name="name" id="name">
 			<label for="email">Email</label>
@@ -62,7 +72,7 @@
 <footer>
 	<nav>
 		<ul>
-			<li class="foot2">Mentions Légales</li>
+			<li class="foot2">Mentions légales</li>
 		</ul>
 	</nav>
 </footer>
