@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/f96ca96193.js" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
@@ -28,7 +29,7 @@
 	<section id="introduction">
 		<figure class="container">
 			<img src="./assets/images/sophie-bluel.png" class="picture" alt="">
-			<button id="modifyImageBtn" class="hide-btn">Modifier</button>
+			<button id="modifyImageBtn" class="hide-btn"><i class="fa-regular fa-pen-to-square black"></i>modifier</button>
 		</figure>
 		<article class="big-text">
 			<h2>Designer d'espace</h2>
@@ -39,14 +40,16 @@
 	</section>
 	<div id="section1">
 	<section id="portfolio">
-		<h2>Mes projets</h2>
-		<button id="modifyProjectsBtn" class="right hide-btn">Modifier</button>
+		<div class="project_container">
+			<h2>Mes projets</h2>
+			<button id="modifyProjectsBtn" class="hide-btn"><i class="fa-regular fa-pen-to-square black"></i>modifier</button>
+		</div>
 		<ul id="menu-categories"></ul>
 		<div id="gallery" class="gallery"></div>
 		<div id="modal" class="modal">
 			<div class="modal-content">
 					<span class="close-btn">&times;</span>
-					<h3>Galerie photo</h3>
+					<h3 class="gallery-title">Galerie photo</h3>
 					
 			</div>
 	</div>
