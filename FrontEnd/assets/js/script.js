@@ -1,114 +1,171 @@
 let travaux;
 let travauxFiltres;
 
-fetch('http://localhost:5678/api/works')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des projets');
-    }
-    return response.json();
-  })
-  .then(data => {
-    travaux = data;
-    travauxFiltres = data; 
-    console.log(travaux);
-
-    let galerieElement = document.querySelector('#gallery');
-    galerieElement.innerHTML = '';
-
-    travaux.forEach(travail => {
-      let figureElement = document.createElement('figure');
-      let imageElement = document.createElement('img');
-      imageElement.src = travail.imageUrl;
-      imageElement.alt = travail.title;
-
-      let figcaptionElement = document.createElement('figcaption');
-      figcaptionElement.textContent = travail.title;
-
-      figureElement.appendChild(imageElement);
-      figureElement.appendChild(figcaptionElement);
-
-      galerieElement.appendChild(figureElement);
+function fetchTravaux() {
+  fetch('http://localhost:5678/api/works')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des projets');
+      }
+      return response.json();
+    })
+    .then(data => {
+      travaux = data;
+      travauxFiltres = data;
+      console.log(travaux);
+      mettreAJourAffichageTravaux();
+    })
+    .catch(error => {
+      console.error(error);
     });
-  })
-  .catch(error => {
-    console.error(error);
+}
+
+function mettreAJourAffichageTravaux() {
+  let galerieElement = document.querySelector('#gallery');
+  galerieElement.innerHTML = '';
+
+  let thumbnailsContainer = document.getElementById('thumbnails-container');
+  thumbnailsContainer.innerHTML = '';
+
+  travauxFiltres.forEach(travail => {
+    
+    let figureElement = document.createElement('figure');
+    let imageElement = document.createElement('img');
+    imageElement.src = travail.imageUrl;
+    imageElement.alt = travail.title;
+    
+    let figcaptionElement = document.createElement('figcaption');
+    figcaptionElement.textContent = travail.title;
+
+    figureElement.appendChild(imageElement);
+    figureElement.appendChild(figcaptionElement);
+
+    galerieElement.appendChild(figureElement);
+
+    let thumbnailElement = document.createElement('div');
+    thumbnailElement.classList.add('thumbnail');
+
+    let deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.innerHTML = '<i class="fa-regular fa-trash-can" style="color: #ffffff;"></i>';
+    deleteButton.addEventListener('click', function () {
+      supprimerTravail(travail.id);
+    });
+
+    let editButton = document.createElement('button');
+    editButton.classList.add('edit-button');
+    editButton.textContent = 'éditer';
+
+    let thumbnailImageElement = document.createElement('img');
+    thumbnailImageElement.src = travail.imageUrl;
+    thumbnailImageElement.alt = travail.title;
+
+    thumbnailElement.appendChild(deleteButton);
+    thumbnailElement.appendChild(editButton);
+    thumbnailElement.appendChild(thumbnailImageElement);
+
+    thumbnailsContainer.appendChild(thumbnailElement);
+  });
+}
+
+function fetchCategories() {
+  fetch('http://localhost:5678/api/categories')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      afficherCategories(data);
+    })
+    .catch(error => console.error('Erreur lors de la récupération des données :', error));
+}
+
+function filtrerTravauxParCategorie(categorieId) {
+  if (categorieId === 0) {
+    travauxFiltres = travaux;
+  } else {
+    travauxFiltres = travaux.filter(travail => travail.category.id === categorieId);
+  }
+  mettreAJourAffichageTravaux();
+}
+function supprimerTravail(id) {
+  travauxFiltres = travauxFiltres.filter(travail => travail.id !== id);
+  mettreAJourAffichageTravaux();
+}
+function afficherCategories(categoriesData) {
+  let menuCategories = document.getElementById('menu-categories');
+  menuCategories.innerHTML = ''; 
+
+  let lienTous = document.createElement('a');
+  lienTous.textContent = "Tous";
+  lienTous.href = '#';
+  lienTous.classList.add('categorie-btn');
+  lienTous.addEventListener('click', function (event) {
+    event.preventDefault();
+    filtrerTravauxParCategorie(0);
+  });
+  let listItemTous = document.createElement('li');
+  listItemTous.appendChild(lienTous);
+
+  menuCategories.appendChild(listItemTous);
+
+  categoriesData.forEach(function (categorie) {
+    let lienCategorie = document.createElement('a');
+    lienCategorie.textContent = categorie.name;
+    lienCategorie.href = '#';
+    lienCategorie.classList.add('categorie-btn');
+    lienCategorie.addEventListener('click', function (event) {
+      event.preventDefault();
+      filtrerTravauxParCategorie(categorie.id);
+    });
+
+    let listItem = document.createElement('li');
+    listItem.appendChild(lienCategorie);
+
+    menuCategories.appendChild(listItem);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  fetchCategories(); 
+  fetchTravaux();
+});
+function createThumbnail(travail) {
+  let thumbnailElement = document.createElement('div');
+  thumbnailElement.classList.add('thumbnail');
+
+  let deleteButton = document.createElement('button');
+  deleteButton.classList.add('delete-button');
+  deleteButton.innerHTML = '<i class="fa-regular fa-trash-can" style="color: #ffffff;"></i>';
+  deleteButton.addEventListener('click', function () {
+    supprimerTravail(travail.id);
   });
 
-fetch('http://localhost:5678/api/categories')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
+  
+  let editButton = document.createElement('button');
+  editButton.classList.add('edit-button');
+  editButton.textContent = 'éditer';
 
-    function filtrerTravauxParCategorie(categorieId) {
-      if (categorieId === 0) {
-        travauxFiltres = travaux;
-      } else {
-        travauxFiltres = travaux.filter(travail => travail.category.id === categorieId);
-      }
-      mettreAJourAffichageTravaux(travauxFiltres);
-    }
+ 
+  let thumbnailImageElement = document.createElement('img');
+  thumbnailImageElement.src = travail.imageUrl;
+  thumbnailImageElement.alt = travail.title;
 
-    function mettreAJourAffichageTravaux(travauxFiltres) {
-      let galerieElement = document.querySelector('#gallery');
-      galerieElement.innerHTML = '';
 
-      travauxFiltres.forEach(travail => {
-        let figureElement = document.createElement('figure');
+  thumbnailElement.appendChild(deleteButton);
+  thumbnailElement.appendChild(editButton);
+  thumbnailElement.appendChild(thumbnailImageElement);
 
-        let imageElement = document.createElement('img');
-        imageElement.src = travail.imageUrl;
-        imageElement.alt = travail.title;
+  return thumbnailElement;
+}
 
-        let figcaptionElement = document.createElement('figcaption');
-        figcaptionElement.textContent = travail.title;
+function afficherThumbnails() {
+  let thumbnailsContainer = document.getElementById('thumbnails-container');
+  thumbnailsContainer.innerHTML = '';
 
-        figureElement.appendChild(imageElement);
-        figureElement.appendChild(figcaptionElement);
-
-        galerieElement.appendChild(figureElement);
-      });
-    }
-
-    let menuCategories = document.getElementById('menu-categories');
-
-    let categoriesData = [
-      {
-        "id": 0,
-        "name": "Tous"
-      },
-      {
-        "id": 1,
-        "name": "Objets"
-      },
-      {
-        "id": 2,
-        "name": "Appartements"
-      },
-      {
-        "id": 3,
-        "name": "Hôtels & restaurants"
-      }
-    ];
-
-    categoriesData.forEach(function (categorie) {
-      let lienCategorie = document.createElement('a');
-      lienCategorie.textContent = categorie.name;
-      lienCategorie.href = '#';
-      lienCategorie.classList.add('categorie-btn');
-      lienCategorie.addEventListener('click', function (event) {
-        event.preventDefault();
-        filtrerTravauxParCategorie(categorie.id); 
-      });
-
-      let listItem = document.createElement('li');
-      listItem.appendChild(lienCategorie);
-
-      menuCategories.appendChild(listItem);
-    });
-  })
-  .catch(error => console.error('Erreur lors de la récupération des données :', error));
-
+  travauxFiltres.forEach(travail => {
+    let thumbnailElement = createThumbnail(travail);
+    thumbnailsContainer.appendChild(thumbnailElement);
+  });
+}
   document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("loginButton");
     loginButton.addEventListener("click", function (event) {

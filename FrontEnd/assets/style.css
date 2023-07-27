@@ -127,6 +127,56 @@ header {
 .modifyBar{
 	display: none;
 }
+#thumbnails-container {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 2px;
+	justify-content: center;
+	align-items: center;
+	margin: 30px;
+}
+.thumbnail img {
+	width: 85%;
+	height: auto;
+}
+.thumbnail {
+  position: relative;
+  display: inline-block;
+  margin: -5px;
+	margin-top: 20px;
+}
+
+.delete-button,
+.edit-button {
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+	background-color: transparent;
+}
+
+.delete-button {
+  top: 5px;
+  right: 18px;
+  background-color: black;
+	border-radius: 0;
+	font-size: 9px;
+  padding: 0px;
+  width: 16px; /* Ajuster la largeur du bouton */
+  height: 16px;
+	border-radius: 2px;
+}
+
+.edit-button {
+  bottom: -17px;
+  left: -5px;
+	color: black;
+	border: none;
+	font-size: 11px;
+	font-family: 'Work Sans';
+}
 .categorie-btn {
   display: inline-block;
   padding: 8px 16px;
@@ -214,16 +264,22 @@ header {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.7);
 }
-
-.modal-content {
+.thumbnails-container {
+  border-bottom: 3px solid #d8d8d8;
+  padding-bottom: 60px;
 	position: absolute;
+	width: 420px;
+}
+.modal-content {
+	position: relative;
 	top: 50%;
 	left: 50%;
-	width: 550px;
-	height: 630px;
+	width: 500px;
+	height: 620px;
 	transform: translate(-50%, -50%);
 	background-color: #fff;
-	padding: 20px;
+	padding: 50px;
+	padding-top: 5px;
 	border-radius: 5px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
