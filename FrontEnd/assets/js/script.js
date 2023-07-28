@@ -27,6 +27,48 @@ function mettreAJourAffichageTravaux() {
   let thumbnailsContainer = document.getElementById('thumbnails-container');
   thumbnailsContainer.innerHTML = '';
 
+  function afficherDeuxiemePage() {
+    let page1 = document.querySelector('.page1');
+    let page2 = document.querySelector('.page2');
+    page1.style.display = 'none';
+    page2.style.display = 'block';
+  }
+  
+  function retourPagePrecedente() {
+    let page1 = document.querySelector('.page1');
+    let page2 = document.querySelector('.page2');
+    page2.style.display = 'none';
+    page1.style.display = 'block';
+  }
+  
+  function ouvrirDeuxiemePageModale() {
+   
+    afficherDeuxiemePage();
+  }
+  
+  const addPhotoButton = document.getElementById('add-photo-button');
+  addPhotoButton.addEventListener('click', function () {
+    
+    ouvrirDeuxiemePageModale();
+  });
+  
+  const retourButton = document.getElementById('retour-page-precedente');
+  retourButton.addEventListener('click', function () {
+    
+    retourPagePrecedente();
+  });
+
+  const deleteGalleryButton = document.getElementById('delete-gallery-button');
+deleteGalleryButton.addEventListener('click', function () {
+  supprimerGalerie();
+});
+
+function supprimerGalerie() {
+  
+  travauxFiltres = [];
+  
+  mettreAJourAffichageTravaux();
+}
   travauxFiltres.forEach(travail => {
     
     let figureElement = document.createElement('figure');
