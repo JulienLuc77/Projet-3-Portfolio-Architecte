@@ -58,10 +58,23 @@
 					<form id="photo-form">
 						<span class="close-btn">&times;</span>
 						<h3 class="title-picture">Ajout photo</h3>
-						<input type="file" id="photo-input" accept="image/*" required>
+						<div class="file-input-container">
+							<label for="photo-input" class="custom-file-button">
+								+ Ajouter photo
+							</label>
+							<input type="file" id="photo-input" accept="image/*" required>
+							<i class="fa-regular fa-image logo-picture"></i>
+							<img id="photo-preview" class="photo-preview" src="#" alt="Photo miniature">
+						</div>
 						<input type="text" id="photo-title" placeholder="Titre" required>
-						<input type="text" id="photo-description" placeholder="Categorie">
-						<button type="submit" class="valid">Valider</button>
+						<label for="photo-description">Catégorie:</label>
+						<select id="photo-description" required>
+							<option value=""></option>
+							<option value="Objets">Objets</option>
+							<option value="Appartements">Appartements</option>
+							<option value="Hôtels et restaurants">Hôtels et restaurants</option>
+						</select>
+						<button type="submit" class="valid" disabled>Valider</button>
 						<button id="retour-page-precedente"><i class="fa-solid fa-arrow-left"></i></button>
 					</form>
 				</div>

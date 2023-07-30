@@ -69,6 +69,64 @@ function supprimerGalerie() {
   
   mettreAJourAffichageTravaux();
 }
+const photoForm = document.getElementById('photo-form');
+const validButton = photoForm.querySelector('.valid');
+
+
+function checkFormValidity() {
+  if (photoForm.checkValidity()) {
+    validButton.removeAttribute('disabled');
+  } else {
+    validButton.setAttribute('disabled', 'disabled');
+  }
+}
+
+
+photoForm.addEventListener('input', checkFormValidity);
+photoForm.addEventListener('change', checkFormValidity);
+photoForm.addEventListener('submit', function (event) {
+  event.preventDefault(); 
+
+ 
+  const title = document.getElementById('photo-title').value;
+  const category = document.getElementById('photo-description').value;
+  const imageFile = document.getElementById('photo-input').files[0];
+
+  
+  const newPhoto = {
+    title: title,
+    category: category,
+    imageUrl: URL.createObjectURL(imageFile) 
+  };
+
+  
+  travauxFiltres.push(newPhoto);
+
+  
+  photoForm.reset();
+
+  
+  mettreAJourAffichageTravaux();
+});
+const photoInput = document.getElementById('photo-input');
+const photoPreview = document.getElementById('photo-preview');
+
+// Événement de changement de fichier pour l'input
+photoInput.addEventListener('change', function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    // Afficher la miniature de la photo sélectionnée
+    photoPreview.style.display = 'inline';
+    const reader = new FileReader();
+    reader.onload = function () {
+      photoPreview.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    // Cacher la miniature s'il n'y a pas de fichier sélectionné
+    photoPreview.style.display = 'none';
+  }
+});
   travauxFiltres.forEach(travail => {
     
     let figureElement = document.createElement('figure');
