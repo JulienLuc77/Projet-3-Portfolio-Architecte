@@ -51,29 +51,34 @@
 					<span class="close-btn">&times;</span>
 					<h3 class="gallery-title">Galerie photo</h3>
 					<div id="thumbnails-container" class="thumbnails-container"></div>
+					<div class="btn">
 					<button id="add-photo-button">Ajouter une photo</button>
 					<button id="delete-gallery-button">Supprimer la galerie</button>
+					</div>
 				</div>
 				<div class="modal-content page2">
 					<form id="photo-form">
-						<span class="close-btn">&times;</span>
+						<span class="close-btn" id="close-btn">&times;</span>
 						<h3 class="title-picture">Ajout photo</h3>
 						<div class="file-input-container">
 							<label for="photo-input" class="custom-file-button">
 								+ Ajouter photo
 							</label>
 							<input type="file" id="photo-input" accept="image/*" required>
-							<i class="fa-regular fa-image logo-picture"></i>
+							<i class="fa-regular fa-image fa-2xl logo-picture"></i>
 							<img id="photo-preview" class="photo-preview" src="#" alt="Photo miniature">
+							<span class="text">jpg. png : 4 mo max</span>
 						</div>
+						<label for="photo-description" class="title-word">Titre</label>
 						<input type="text" id="photo-title" placeholder="Titre" required>
-						<label for="photo-description">Catégorie:</label>
+						<label for="photo-description" class="category-word">Catégorie</label>
 						<select id="photo-description" required>
 							<option value=""></option>
 							<option value="Objets">Objets</option>
 							<option value="Appartements">Appartements</option>
 							<option value="Hôtels et restaurants">Hôtels et restaurants</option>
 						</select>
+						<hr class="rod">
 						<button type="submit" class="valid" disabled>Valider</button>
 						<button id="retour-page-precedente"><i class="fa-solid fa-arrow-left"></i></button>
 					</form>

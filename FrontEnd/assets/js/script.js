@@ -111,11 +111,11 @@ photoForm.addEventListener('submit', function (event) {
 const photoInput = document.getElementById('photo-input');
 const photoPreview = document.getElementById('photo-preview');
 
-// Événement de changement de fichier pour l'input
+
 photoInput.addEventListener('change', function (event) {
   const file = event.target.files[0];
   if (file) {
-    // Afficher la miniature de la photo sélectionnée
+    
     photoPreview.style.display = 'inline';
     const reader = new FileReader();
     reader.onload = function () {
@@ -123,7 +123,7 @@ photoInput.addEventListener('change', function (event) {
     };
     reader.readAsDataURL(file);
   } else {
-    // Cacher la miniature s'il n'y a pas de fichier sélectionné
+    
     photoPreview.style.display = 'none';
   }
 });
@@ -380,4 +380,15 @@ document.addEventListener("DOMContentLoaded", function () {
           modal.style.display = "none";
       }
   });
+  const closeBtnPage1 = document.querySelector(".page1 .close-btn");
+  closeBtnPage1.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+
+  
+  const closeBtnPage2 = document.getElementById("close-btn");
+  closeBtnPage2.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+
 });

@@ -147,9 +147,6 @@ header {
 	width: 105%;
 }
 #add-photo-button{
-	position: absolute;
-	top: 84%;
-	left: 32%;
 	padding: 10px;
 	font-family: 'Syne';
 	font-size: 12.5px;
@@ -157,58 +154,82 @@ header {
 	background-color: #1D6154;
 	border-radius: 80px;
 	border: none;
-	width: 14vw;
+	width: 220px;
 	cursor: pointer;
+	margin-bottom: 18px;
 }
 .page2{
 	display: none;
 }
 #delete-gallery-button{
-	position: absolute;
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
 	font-family: 'Work Sans';
 	color: rgb(231, 96, 96);
 	font-size: 13px;
-	top: 92%;
-	left: 39%;
 }
 .valid{
 	width: 200px;
 	position: absolute;
-	top: 80.1%;
-	left: 33.5%;
+  bottom: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rod{
+	margin-right: 64px;
+	margin-top: 40px;
+	border: none;
+	width: 390px;
+	border-top: 1px solid #ccc; 
 }
 .logo-picture{
 	color: #c0c0c0;
 	position: absolute;
 	width: 25px;
-  top: 30%;
-  left: 50%;
+  top: 28%;
+  left: 48%;
   transform: translate(-50%, -50%);
+	transform: scale(1.8);
+}
+.text{
+	position: absolute;
+	top:42%;
+	left:43%;
+  font-size: 9px;
 }
 .custom-file-button {
   position: absolute;
-	top: 36%;
+	top: 35%;
 	left: 37%;
 	width: 135px;
+	font-size: 13px;
   display: inline-block;
-  padding: 8px 12px;
+	padding-left: 29px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	height: 12px;
   background-color: #dddddd;
   color: rgb(50, 88, 170);
   border-radius: 25px;
   cursor: pointer;
   z-index: 3; 
 }
+
 .photo-preview {
   display: none; 
   max-width: 164px; 
-  max-height: 164px;
+  max-height: 160px;
   margin-top: 10px;
 	position: absolute;
 	top: 18.3%;
 	left: 42%;
+}
+.file-input-container .custom-file-button.hidden {
+  display: none;
 }
 .delete-button,
 .edit-button {
@@ -226,7 +247,7 @@ header {
   right: 18px;
   background-color: black;
 	border-radius: 0;
-	font-size: 9px;
+	font-size: 10px;
   padding: 0px;
   width: 16px; /* Ajuster la largeur du bouton */
   height: 16px;
@@ -349,6 +370,15 @@ header {
 	padding-right: 35px;
 	padding-left: 65px;
 }
+.btn {
+	position: absolute;
+  bottom: 40px; 
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .gallery-title{
 	display: flex;
 	justify-content: center;
@@ -380,7 +410,7 @@ button[type="submit"]{
 	display: flex;
   justify-content: center;
   align-items: center;
-	width: 14vw;
+	width: 200px;
 	cursor: pointer;
 }
 #loginForm {
@@ -393,7 +423,7 @@ button[type="submit"]{
 	position: relative;
 	margin-top: 50px;
 	margin-right: 20px;
-  height: 145px;
+  height: 140px;
   font-size: 1.2em;
   border: none;
   padding: 10px; 
@@ -406,7 +436,18 @@ button[type="submit"]{
 	outline: none;
 }
 .modal-content.page2{
+	position: relative;
 	height: 550px;
+}
+.category-word{
+	position: absolute;
+	top : 64%;
+	left: 18.5%;
+}
+.title-word{
+	position: absolute;
+	top : 50%;
+	left: 18.5%;
 }
 #photo-form input[type="text"] {
 	position: relative;
@@ -431,7 +472,23 @@ button[type="submit"]{
 }
 #photo-description {
   position: relative;
-  margin-top: 25px;
+  margin-top: 40px;
+  margin-right: 20px;
+  height: 45px;
+  font-size: 1em;
+	font-family: 'Work Sans', sans-serif;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding-left: 15px;
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+  width: 392px;
+  margin-bottom: 0px;
+}
+#photo-category{
+	position: relative;
+  margin-top: 40px;
   margin-right: 20px;
   height: 45px;
   font-size: 1em;
