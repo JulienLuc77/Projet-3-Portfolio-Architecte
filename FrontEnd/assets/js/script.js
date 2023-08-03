@@ -27,6 +27,13 @@ function mettreAJourAffichageTravaux() {
   let thumbnailsContainer = document.getElementById('thumbnails-container');
   thumbnailsContainer.innerHTML = '';
 
+  function afficherPage1() {
+    let page1 = document.querySelector('.page1');
+    let page2 = document.querySelector('.page2');
+    page1.style.display = 'block';
+    page2.style.display = 'none';
+  }
+
   function afficherDeuxiemePage() {
     let page1 = document.querySelector('.page1');
     let page2 = document.querySelector('.page2');
@@ -42,7 +49,7 @@ function mettreAJourAffichageTravaux() {
   }
   
   function ouvrirDeuxiemePageModale() {
-   
+    afficherPage1();  
     afficherDeuxiemePage();
   }
   
@@ -80,7 +87,11 @@ function checkFormValidity() {
     validButton.setAttribute('disabled', 'disabled');
   }
 }
-
+function fermerModale() {
+  afficherPage1();
+  let modal = document.getElementById('modal');
+  modal.style.display = 'none';
+}
 
 photoForm.addEventListener('input', checkFormValidity);
 photoForm.addEventListener('change', checkFormValidity);
@@ -104,9 +115,15 @@ photoForm.addEventListener('submit', function (event) {
 
   
   photoForm.reset();
-
+  const photoInput = document.getElementById('photo-input');
+  photoInput.value = '';
+  
+  
+  photoPreview.style.display = 'none';
+  photoPreview.src = '';
   
   mettreAJourAffichageTravaux();
+  fermerModale();
 });
 const photoInput = document.getElementById('photo-input');
 const photoPreview = document.getElementById('photo-preview');
@@ -325,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const modifyProjectsBtn = document.getElementById("modifyProjectsBtn");
   const modal = document.getElementById("modal");
   const closeBtn = document.querySelector(".close-btn");
-  const filterButtons = document.getElementById("menu-categories"); // Récupérer le conteneur des boutons filtres
+  const filterButtons = document.getElementById("menu-categories"); 
 
   const token = localStorage.getItem("userToken");
 
@@ -364,6 +381,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   modifyImageBtn.addEventListener("click", function () {
+      afficherPage1();
+      ouvrirDeuxiemePageModale();
       modal.style.display = "block";
   });
 

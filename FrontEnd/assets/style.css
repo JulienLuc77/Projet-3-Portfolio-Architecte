@@ -218,7 +218,9 @@ header {
   cursor: pointer;
   z-index: 3; 
 }
-
+.hide-elements {
+  display: none;
+}
 .photo-preview {
   display: none; 
   max-width: 164px; 
