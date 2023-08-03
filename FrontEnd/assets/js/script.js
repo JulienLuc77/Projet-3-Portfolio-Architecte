@@ -357,6 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       
       filterButtons.style.display = "none";
+      filterButtons.classList.add("hidden");
   } else {
       
       loginListItem.style.display = "block";
@@ -366,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modifyImageBtn.classList.add("hide-btn");
       modifyProjectsBtn.classList.add("hide-btn");
 
-   
+      filterButtons.classList.remove("hidden");
       filterButtons.style.display = "block";
   }
 
