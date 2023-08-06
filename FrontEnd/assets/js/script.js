@@ -412,3 +412,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+fetch(`http://localhost:5678/api/works/${datasetId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+fetch('http://localhost:5678/api/works',{
+          method:'POST',
+          headers:{
+              'accept':'application/json',
+              'Authorization':`Bearer ${localStorage.getItem('token')}`
+          },
+          body:formData
+      });
