@@ -32,6 +32,7 @@ function mettreAJourAffichageTravaux() {
     let page2 = document.querySelector('.page2');
     page1.style.display = 'block';
     page2.style.display = 'none';
+    validButton.setAttribute('disabled', 'disabled');
   }
 
   function afficherDeuxiemePage() {
@@ -139,6 +140,9 @@ photoInput.addEventListener('change', function (event) {
       photoPreview.src = reader.result;
     };
     reader.readAsDataURL(file);
+    document.querySelector('.custom-file-button').style.display = 'none';
+    document.querySelector('.text').style.display = 'none';
+
   } else {
     
     photoPreview.style.display = 'none';
@@ -283,33 +287,6 @@ function afficherThumbnails() {
     thumbnailsContainer.appendChild(thumbnailElement);
   });
 }
-  document.addEventListener("DOMContentLoaded", function () {
-    const loginButton = document.getElementById("loginButton");
-    loginButton.addEventListener("click", function (event) {
-        event.preventDefault(); 
-        loginUser();
-    });
-});
-
-function loginUser() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const validEmail = "sophie.bluel@test.tld";
-    const validPassword = "SOphie";
-
-    if (email === validEmail && password === validPassword) {
-        
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4";
-        localStorage.setItem("userToken", token);
-
-        
-        window.location.href = "./index.html?authenticated=true";
-    } else {
-        
-        alert("Identifiant ou mot de passe incorrect.");
-    }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
  
@@ -407,24 +384,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
   const closeBtnPage2 = document.getElementById("close-btn");
-  closeBtnPage2.addEventListener("click", function () {
+  closeBtnPage2.addEventListener("click", () => {
     modal.style.display = "none";
   });
 
 });
-
-fetch(`http://localhost:5678/api/works/${datasetId}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        });
-
-fetch('http://localhost:5678/api/works',{
-          method:'POST',
-          headers:{
-              'accept':'application/json',
-              'Authorization':`Bearer ${localStorage.getItem('token')}`
-          },
-          body:formData
-      });

@@ -723,3 +723,12 @@ footer nav ul {
 	margin: 2em
 }
 
+.wrongpassword{
+	color: red;
+	font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+	height: 60vh;
+}
