@@ -12,6 +12,13 @@ function fetchTravaux() {
     .then(data => {
       travaux = data;
       travauxFiltres = data;
+
+      
+      if (travaux.length > 0) {
+        const userId = travaux[0].userId;
+        localStorage.setItem('userId', userId);
+      }
+
       console.log(travaux);
       mettreAJourAffichageTravaux();
     })

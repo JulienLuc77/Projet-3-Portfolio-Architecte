@@ -1,18 +1,19 @@
 const addButton = document.getElementById('valider-button');
-
+const photoForm = document.getElementById('photo-form');
 addButton.addEventListener('submit', function (e) {
   e.preventDefault();
-  const photoForm = document.getElementById('photo-form');
+  
   const title = document.getElementById('photo-title').value;
   const category = document.getElementById('photo-description').value;
   const imageFile = document.getElementById('photo-input').files[0];
-  
+  const userId = localStorage.getItem('userId');
 
 
   const formData = new FormData();
   formData.append('image', imageFile); 
   formData.append('title', title); 
-  formData.append('category', category); 
+  formData.append('category', category);
+  formData.append('userId', userId);
 
   fetch('http://localhost:5678/api/works', {
     method: 'POST',
