@@ -61,6 +61,11 @@
               <button id="add-photo-button">Ajouter une photo</button>
               <button id="delete-gallery-button">Supprimer la galerie</button>
             </div>
+            <div class="confirmation-modal">
+              <p>Êtes-vous sûr de vouloir supprimer entièrement la galerie ?</p>
+              <button id="confirm-yes">Oui</button>
+              <button id="confirm-no">Annuler</button>
+            </div>
           </div>
           <div class="modal-content page2">
             <form id="photo-form">
@@ -72,6 +77,7 @@
                 <i class="fa-regular fa-image fa-2xl logo-picture"></i>
                 <img id="photo-preview" class="photo-preview" src="#" alt="Photo miniature">
                 <span class="text">jpg. png : 4 mo max</span>
+                <p id="error-message" class="error-message">L'image est trop grande (> 4 Mo)</p>
               </div>
               <label for="photo-description" class="title-word">Titre</label>
               <input type="text" id="photo-title" placeholder="Titre" required>
@@ -80,7 +86,7 @@
                 <option value=""></option>
                 <option value="Objets">Objets</option>
                 <option value="Appartements">Appartements</option>
-                <option value="Hôtels et restaurants">Hôtels et restaurants</option>
+                <option value="Hotels & restaurants">Hotels & restaurants</option>
               </select>
               <hr class="rod">
               <button type="submit" class="valid" id="valider-button">Valider</button>
