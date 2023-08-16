@@ -270,7 +270,7 @@ header {
   right: 14px;
   background-color: black;
 	border-radius: 0;
-	font-size: 10px;
+	font-size: 12.5px;
   padding: 0px;
   width: 16px; 
   height: 16px;
@@ -646,8 +646,8 @@ button[type="submit"]{
 	margin-left: 1px;
 	margin-top: 1px;
   background-color: black;
-	font-size: 10px;
-  padding: 0px;
+	font-size: 12px;
+	padding: 0;
   width: 16px; 
   height: 16px;
 	border-radius: 2px;
@@ -817,12 +817,10 @@ footer nav ul {
 
 .wrongpassword{
 	color: red;
-	font-size: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-	height: 60vh;
+	font-size: 14px;
+	position: absolute;
+	left: 41%;
+	top: 68%;
 }
 /****** Media queries ***********/
 /* High devices (desktop, sup/equal than 1440px) */
@@ -834,7 +832,13 @@ footer nav ul {
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	
+	.wrongpassword{
+		color: red;
+		font-size: 14px;
+		position: absolute;
+		left: 43%;
+		top: 60%;
+	}
 
 } 
 
