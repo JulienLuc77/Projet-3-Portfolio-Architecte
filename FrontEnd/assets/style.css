@@ -28,9 +28,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
-	line-height: 1;
-}
+
 .bold{
 	font-weight: 600;
 }
@@ -114,11 +112,12 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+.main-container{
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	line-height: 1;
 }
 header {
 	display: flex;
@@ -211,15 +210,51 @@ header {
 	color: #c0c0c0;
 	position: absolute;
 	width: 25px;
-  top: 25%;
+  top: 23%;
   left: 48%;
   transform: translate(-50%, -50%);
 	transform: scale(1.8);
 }
+.band{
+	background-color: #000000;
+	height: 45px;
+	width: 100%;
+	display: none;
+	position: relative;
+  z-index: 1;
+}
+.btn-mod{
+	border: none;
+	color: white;
+	background-color: black;
+	font-family: 'Work Sans';
+	font-size: 11px;
+	position: absolute;
+	left: 42%;
+	top: 30%;
+	cursor: pointer;
+}
+.publish-button{
+	position: absolute;
+	left: 50%;
+	top: 18%;
+	background-color: white;
+	border-radius: 25px;
+	border: none;
+	font-family: 'Work Sans';
+	font-size: 11px;
+	padding: 8px;
+	width: 170px;
+	cursor: pointer;
+}
+.white{
+	color: white;
+	margin-right: 8px;
+}
 .text{
 	position: absolute;
 	top:38%;
-	left:43.5%;
+	left:42.5%;
   font-size: 8px;
 }
 .custom-file-button {
@@ -229,7 +264,7 @@ header {
 	width: 110px;
 	font-size: 11px;
   display: inline-block;
-	padding-left: 29px;
+	padding-left: 25px;
 	padding-top: 8px;
 	padding-bottom: 18px;
 	height: 2px;
