@@ -407,71 +407,76 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.style.display = "block";
 });
   publishChangesBtn.addEventListener("click", async function () {
-    const title = document.getElementById("photo-title").value;
-    const category = document.getElementById("photo-description").value;
-    let categoryId;
+    
+  const title = document.getElementById('photo-title').value;
+  const category = document.getElementById('photo-description').value;
+  let categoryId;
+  function fermerModale() {
+    afficherPage1();
+    let modal = document.getElementById('modal');
+    modal.style.display = 'none';
+  }
+  function afficherPage1() {
+    let page1 = document.querySelector('.page1');
+    let page2 = document.querySelector('.page2');
+    page1.style.display = 'block';
+    page2.style.display = 'none';
 
-    const imageFile = document.getElementById("photo-input").files[0];
+  }
+  const imageFile = document.getElementById('photo-input').files[0];
+  const userId = localStorage.getItem('userId');
 
-    switch (category) {
-      case "Objets":
-        categoryId = 1;
-        break;
+  switch (category) {
+    case "Objets":
+      categoryId = 1;
+      break;
+  
+    case "Appartements":
+      categoryId = 2;
+      break;
 
-      case "Appartements":
-        categoryId = 2;
-        break;
+    case "Hotels & restaurants":
+      categoryId = 3;
+      break;
 
-      case "Hotels & restaurants":
-        categoryId = 3;
-        break;
+    default:
+      categoryId = 0;
+      break;
+  }
 
-      default:
-        categoryId = 0;
-        break;
+  const formData = new FormData();
+  formData.append('image', imageFile); 
+  formData.append('title', title); 
+  formData.append('category', categoryId);
+
+  try {
+    const response = await fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      console.log('Travail ajouté avec succès');
+
+      
+      document.getElementById('photo-title').value = '';
+      document.getElementById('photo-description').value = '';
+      document.getElementById('photo-input').value = '';
+      document.getElementById('photo-preview').style.display = 'none';
+
+      fetchTravaux();
+      fermerModale();
+    } else {
+      const errorData = await response.json();
+      console.error("Erreur lors de l'ajout :", errorData);
     }
-
-    const formData = new FormData();
-    formData.append("image", imageFile);
-    formData.append("title", title);
-    formData.append("category", categoryId);
-
-    try {
-      const response = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-        body: formData,
-      });
-
-      if (response.ok) {
-        console.log("Travail ajouté avec succès");
-
-        document.getElementById("photo-title").value = "";
-        document.getElementById("photo-description").value = "";
-        document.getElementById("photo-input").value = "";
-        document.getElementById("photo-preview").style.display = "none";
-
-        travauxFiltres.push({
-          title: title,
-          category: {
-            id: categoryId,
-            name: category,
-          },
-          imageUrl: URL.createObjectURL(imageFile),
-        });
-
-        afficherThumbnails();
-        fermerModale();
-      } else {
-        const errorData = await response.json();
-        console.error("Erreur lors de l'ajout :", errorData);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  });
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
 
   const token = localStorage.getItem("userToken");
   if (token) {
@@ -520,7 +525,7 @@ deleteButtons.forEach(button => {
 });
 
 
-const deleteGalleryButton = document.getElementById('delete-gallery-button');
+const deleteGalleryButton = document.querySelector('delete-gallery-button');
 const confirmationModal = document.querySelector('.confirmation-modal');
 const confirmYesButton = document.getElementById('confirm-yes');
 const confirmNoButton = document.getElementById('confirm-no');
@@ -571,7 +576,18 @@ addButton.addEventListener('click', async function (e) {
   const title = document.getElementById('photo-title').value;
   const category = document.getElementById('photo-description').value;
   let categoryId;
+  function fermerModale() {
+    afficherPage1();
+    let modal = document.getElementById('modal');
+    modal.style.display = 'none';
+  }
+  function afficherPage1() {
+    let page1 = document.querySelector('.page1');
+    let page2 = document.querySelector('.page2');
+    page1.style.display = 'block';
+    page2.style.display = 'none';
 
+  }
   const imageFile = document.getElementById('photo-input').files[0];
   const userId = localStorage.getItem('userId');
 
@@ -616,9 +632,8 @@ addButton.addEventListener('click', async function (e) {
       document.getElementById('photo-input').value = '';
       document.getElementById('photo-preview').style.display = 'none';
 
-      
-      ouvrirDeuxiemePageModale();
       fetchTravaux();
+      fermerModale();
     } else {
       const errorData = await response.json();
       console.error("Erreur lors de l'ajout :", errorData);
