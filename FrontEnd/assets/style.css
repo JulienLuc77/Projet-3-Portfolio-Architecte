@@ -457,7 +457,7 @@ header {
 }
 .close-btn {
 	position: absolute;
-	top: 18px;
+	top: 25px;
 	right: 28px;
 	font-size: 23px;
 	cursor: pointer;

@@ -209,16 +209,23 @@ function supprimerTravail(id) {
 }
 function afficherCategories(categoriesData) {
   let menuCategories = document.getElementById('menu-categories');
-  menuCategories.innerHTML = ''; 
+  menuCategories.innerHTML = '';
 
   let lienTous = document.createElement('a');
   lienTous.textContent = "Tous";
   lienTous.href = '#';
-  lienTous.classList.add('categorie-btn');
+  lienTous.classList.add('categorie-btn', 'active'); 
   lienTous.addEventListener('click', function (event) {
     event.preventDefault();
     filtrerTravauxParCategorie(0);
+
+    
+    menuCategories.querySelectorAll('.categorie-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    lienTous.classList.add('active');
   });
+
   let listItemTous = document.createElement('li');
   listItemTous.appendChild(lienTous);
 
@@ -232,6 +239,12 @@ function afficherCategories(categoriesData) {
     lienCategorie.addEventListener('click', function (event) {
       event.preventDefault();
       filtrerTravauxParCategorie(categorie.id);
+
+      
+      menuCategories.querySelectorAll('.categorie-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      lienCategorie.classList.add('active');
     });
 
     let listItem = document.createElement('li');
