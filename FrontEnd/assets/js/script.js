@@ -161,7 +161,7 @@ photoInput.addEventListener('change', function (event) {
 
     let thumbnailElement = document.createElement('div');
     thumbnailElement.classList.add('thumbnail');
-
+    thumbnailElement.setAttribute("id",`thumbnail-${travail.id}`)
     let deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
     deleteButton.innerHTML = '<i class="fa-regular fa-trash-can" style="color: #ffffff;"></i>';
@@ -478,3 +478,182 @@ document.addEventListener("DOMContentLoaded", function () {
     bandElement.style.display = "block";
   }
 });
+
+function supprimerTravail(id) {
+  fetch(`http://localhost:5678/api/works/${id}`, {
+   method: "DELETE",
+   headers: {
+     'Authorization': `Bearer ${localStorage.getItem("userToken")}`
+   }
+ })
+ .then(response => {
+   if (response.ok) {
+     console.log("Travail supprimé avec succès");
+
+     const thumbnailElement = document.getElementById(`thumbnail-${id}`);
+     console.log(thumbnailElement)
+     thumbnailElement.remove();
+     fetchTravaux()
+   } else {
+     return response.text().then(res => {
+       console.error("Erreur lors de la suppression :", res);
+       throw new Error("Échec de la suppression");
+     });
+   }
+ });
+}
+
+
+const deleteButtons = document.querySelectorAll('.delete-button');
+deleteButtons.forEach(button => {
+ button.addEventListener('click', async function (e) {
+   e.preventDefault(); 
+
+   const travailId = button.dataset.id;
+
+   try {
+     await supprimerTravail(travailId);
+   } catch (error) {
+     console.error(error);
+   }
+ });
+});
+
+
+const deleteGalleryButton = document.getElementById('delete-gallery-button');
+const confirmationModal = document.querySelector('.confirmation-modal');
+const confirmYesButton = document.getElementById('confirm-yes');
+const confirmNoButton = document.getElementById('confirm-no');
+
+deleteGalleryButton.addEventListener('click', function () {
+ confirmationModal.style.display = 'block'; 
+});
+
+confirmNoButton.addEventListener('click', function () {
+ confirmationModal.style.display = 'none'; 
+});
+
+confirmYesButton.addEventListener('click', async function () {
+ confirmationModal.style.display = 'none';
+
+ try {
+   await supprimerGalerie(); 
+ } catch (error) {
+   console.error(error);
+ }
+});
+
+
+async function supprimerGalerie() {
+ const travauxASupprimer = [...travauxFiltres]; 
+
+ 
+ for (const travail of travauxASupprimer) {
+   try {
+     await supprimerTravail(travail.id);
+   } catch (error) {
+     console.error(error);
+   }
+ }
+}
+
+
+
+
+
+//POST/////////////////////////////////////////////////////////
+const photoPostpreview = document.getElementById('photo-preview'); 
+const addButton = document.getElementById('valider-button');
+const photoForm = document.getElementById('photo-form');
+addButton.addEventListener('click', async function (e) {
+  e.preventDefault();
+
+  const title = document.getElementById('photo-title').value;
+  const category = document.getElementById('photo-description').value;
+  let categoryId;
+
+  const imageFile = document.getElementById('photo-input').files[0];
+  const userId = localStorage.getItem('userId');
+
+  switch (category) {
+    case "Objets":
+      categoryId = 1;
+      break;
+  
+    case "Appartements":
+      categoryId = 2;
+      break;
+
+    case "Hotels & restaurants":
+      categoryId = 3;
+      break;
+
+    default:
+      categoryId = 0;
+      break;
+  }
+
+  const formData = new FormData();
+  formData.append('image', imageFile); 
+  formData.append('title', title); 
+  formData.append('category', categoryId);
+
+  try {
+    const response = await fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      console.log('Travail ajouté avec succès');
+
+      
+      document.getElementById('photo-title').value = '';
+      document.getElementById('photo-description').value = '';
+      document.getElementById('photo-input').value = '';
+      document.getElementById('photo-preview').style.display = 'none';
+
+      
+      ouvrirDeuxiemePageModale();
+      fetchTravaux();
+    } else {
+      const errorData = await response.json();
+      console.error("Erreur lors de l'ajout :", errorData);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+const photoInput = document.getElementById('photo-input');
+const errorMessage = document.getElementById('error-message');
+
+photoInput.addEventListener('change', function (event) {
+  const file = event.target.files[0];
+
+  if (file) {
+    const fileSizeInMB = file.size / (1024 * 1024); 
+
+    if (fileSizeInMB > 4) {
+      errorMessage.style.display = 'block'; 
+      photoInput.value = ''; 
+    } else {
+      errorMessage.style.display = 'none'; 
+      photoPostpreview.style.display = 'inline';
+      const reader = new FileReader();
+      reader.onload = function () {
+        photoPostpreview.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+      document.querySelector('.custom-file-button').style.display = 'none';
+      document.querySelector('.text').style.display = 'none';
+    }
+  } else {
+    photoPostpreview.style.display = 'none';
+    errorMessage.style.display = 'none'; 
+  }
+});
+
+
